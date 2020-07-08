@@ -1,0 +1,30 @@
+body,ol,ul,li,h1,h2,h3,h4,h5,h6,p,input,dd,dl,dt,fieldset,figure,legend,figcaption,section{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-size: 16px;
+    font-family: "Microsoft Yahei","微软雅黑",verdana;
+    color: #333;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-weight: normal;
+}
+i,em{
+    font-style: normal;
+}
+b,strong{
+    font-weight: normal;
+}
+a{
+    text-decoration: none;
+    color: #333;
+}
+li,ul{
+    list-style: none;
+}
+input{
+    outline: none;
+}
+img{vertical-align: top;}
