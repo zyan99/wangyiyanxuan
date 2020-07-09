@@ -31,22 +31,38 @@ $(document).ready(function(){
         if(json.code==0){
             alert('购物车里空空的')
         }else{
-            console.log(json.data[0]);
+            // console.log(json.data[0]);
             var obj = json.data[0];
             $('.product_name').html(obj.product_name);
+            $('.product_name').attr('id',obj.product_id);   
             $('.product_img img').attr('src',obj.product_img);
             $('.product_price').html("¥"+obj.product_price);
             $('.product_num .num').html(obj.product_num);
+            // console.log($('.product_name').attr('id'))
         }
     })
 })
 
+
+// 数量减少
 $('.selnum .less').click(function(){
-    console.log($('.product_num .num').html()-0)
+    // console.log(($('.product_num .num').html()-0)-1)
+    if(($('.product_num .num').html()-0)-1==0){
+        $.get('../interface/delwq.php',{
+            id:($('.product_name').attr('id'))-0
+        },function(data){
+            var json = JSON.parse(data);
+            if(json.code==1){
+                alert('商品删除了啦');
+                window.location.reload(true);
+            }
+        })
+    }
+    // 更新页面上的数量
     $('.product_num .num').html(($('.product_num .num').html()-0)-1)
     $.get('../interface/updatewq.php',{
         type:'cut',
-        id:123456
+        id:($('.product_name').attr('id'))-0
     },function(data){
         var json = JSON.parse(data);
         if(json.code==1){
@@ -61,7 +77,7 @@ $('.selnum .more').click(function(){
     $('.product_num .num').html(($('.product_num .num').html()-0)+1);
     $.get('../interface/updatewq.php',{
         type:'add',
-        id:123456
+        id:($('.product_name').attr('id'))-0
     },function(data){
         var json = JSON.parse(data);
         if(json.code==1){
@@ -72,9 +88,11 @@ $('.selnum .more').click(function(){
     })
 })
 
+
+// 删除
 $('.cart_btn').click(function(){
     $.get('../interface/delwq.php',{
-        id:123456
+        id:($('.product_name').attr('id'))-0
     },function(data){
         var json = JSON.parse(data);
         if(json.code==1){

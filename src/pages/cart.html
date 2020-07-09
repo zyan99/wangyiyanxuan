@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../js/cookie.js"></script>
+    <script>
+        // 如果没有登陆过,跳转到登录页面
+        var username = getCookie('name');
+        if(username == undefined){
+            location.href = "./login.html";
+        }
+    </script>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/iconfont.css">
     <link rel="stylesheet" href="../css/cart.css">
@@ -22,7 +30,7 @@
                     </div>
                     <div class="header_top_content_right">
                         <ul>
-                            <li class="right_nav_first right_nav f_left"><a href="#">登录/注册</a></li>
+                            <li class="right_nav_first right_nav f_left"><a href="./login.html">登录/注册</a></li>
                             <li class="right_nav f_left">
                                 <a href="#">我的订单</a>
                             </li>

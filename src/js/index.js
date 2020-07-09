@@ -22,7 +22,29 @@ $('.header_box_nav_item').mouseenter(function(){
     })
 })
 
+// 点击购物车跳转到购物车页面
+$('.header_box_cart_center').click(function(){
+    $(location).attr('href', './cart.html');
+})
 
+// 回到顶部页面上方卷曲高度大于300显示
+$(window).scroll(function(){
+    if($(window).scrollTop()>300){
+        $('.to_top').css({
+            display:'block'
+        })
+    }else{
+        $('.to_top').css({
+            display:'none'
+        })
+    }
+    console.log($(window).scrollTop())
+})
+
+// 回到顶部
+$('.to_top').click(function(){
+    $(window).scrollTop(0)
+})
 
 // 新品首发图片移入效果f4f0ea
 // console.log($('.swiper_box2 .swiper-slide'))
@@ -156,7 +178,7 @@ function timeDiff(time1, time2) {
     obj.seconds = seconds
     return obj
 }
-    var time1 = new Date('2020/7/9 08:50:23')
+    var time1 = new Date('2020/9/15 08:50:23')
     setInterval(function(){
         var time2 = new Date()
         var res = timeDiff(time1, time2)
@@ -242,3 +264,54 @@ var mySwiper = new Swiper ('.swiper_box1', {
       el: '.swiper-scrollbar',
     },
   })
+
+
+
+// 搜索栏关键字联想
+$('.inp_s').on('input',function(){
+    // 判断没有值的时候隐藏盒子
+    if(!$(this).val()){
+        $('.associate').css({
+            display:'none'
+        })
+        $('.seach_text').css({
+            display:'block'
+        })
+    }else{
+        $('.seach_text').css({
+            display:'none'
+        })
+    }
+    // 获取输入的关键字
+    var text =  $(this).val();
+    // 利用 $.ajax发请求
+    $.ajax({
+        // callback不能写在参数里面, 要jquery帮我们自动拼接
+        url:'https://suggest.taobao.com/sug?code=utf-8&q='+text+'&extras=1&area=c2c&bucketid=atb_search&pid=mm_130402922_1108650181_109789550220&unid=&clk1=&_=1593344789535&callback=jsonp5',
+        success:function(data){
+            // 为了防止重复添加li要把ul里面的内容清空
+            $('.associate').empty()
+            // console.log(data.result)
+            // 全局的each方法:$.each(要遍历的对象, 每次遍历执行的函数)
+            $.each(data.result,function(index,item){
+                // console.log(index+item)
+                $('.associate').css({
+                    display:'block'
+                }).append('<li>'+ item[0] +'</li>')
+            })
+            $('.associate > li').click(function(){
+                $('.inp_s').val($(this).html())
+                $('.associate').css({
+                    display:'none'
+                })
+            })
+        },
+        dataType:'jsonp'
+    })
+})
+
+$('.associate').mouseleave(function(){
+    $(this).css({
+        display:'none'
+    })
+})

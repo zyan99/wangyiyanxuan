@@ -23,6 +23,12 @@ $('.header_box_nav_item').mouseenter(function(){
 })
 
 
+// 点击购物车跳转到购物车页面
+$('.header_box_cart_center').click(function(){
+    $(location).attr('href', './cart.html');
+})
+
+
 
 // 动态设置input内的value
 $('.selnum input').on('input',function(){
@@ -67,6 +73,11 @@ $('.selnum .less').click(function(){
     }
     // $('.selnum input').attr('value',($('.selnum input').val()-0)-1)
     $('.selnum input').val(($('.selnum input').val()-0)-1)
+    if($('.selnum input').val()<=1){
+        $(this).addClass('disb')
+    }else{
+        $(this).removeClass('disb')
+    }
 })
 // +++加
 $('.selnum .more').click(function(){
