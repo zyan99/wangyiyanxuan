@@ -717,6 +717,9 @@
 .swiper-slide .bd{
     margin-top: 8px;
 }
+.swiper-slide .bd .name a:hover{
+    color: #b3a07d;
+}
 .prdtTags{
     height: 20px;
     font-size: 0;
@@ -1470,6 +1473,9 @@
     color: #ffffff;
 }
 
+
+
+/* 回到顶部按钮 */
 .to_top{
     width: 60px;
     /* height: 50px; */

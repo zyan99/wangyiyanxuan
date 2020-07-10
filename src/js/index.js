@@ -1,7 +1,7 @@
 // console.log($('.header_box_nav_item').eq(0));
 // 导航列表移入显示. 移除隐藏
 $('.header_box_nav_item').mouseenter(function(){
-    // console.log($(this).find(".yx_dropdown").children().eq(0).children().length)
+    console.log($(this).find(".yx_dropdown").children().eq(0).children().length)
     // console.log($(this).index())
     var $width = $(this).find(".yx_dropdown").children().eq(0).children().width()
     $(this).find('a').addClass('active')
@@ -11,7 +11,7 @@ $('.header_box_nav_item').mouseenter(function(){
         // 动态设置盒子宽
         width:$(this).find(".yx_dropdown").children().eq(0).children().length * ( $width + 24) + 40,
         // 设置位置
-        left:0,
+        left:-($(this).find(".yx_dropdown").children().eq(0).children().length - 8) * 74 - 65,
         zIndex:999
     }).fadeIn(150,'linear')
 }).mouseleave(function(){
